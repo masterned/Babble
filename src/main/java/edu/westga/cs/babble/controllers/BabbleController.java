@@ -26,11 +26,14 @@ import javafx.scene.input.MouseEvent;
  * @version 2021-08-24
  */
 public class BabbleController implements Initializable {
+	/* communicating with the other controller */
+	private final WordDictionary wordDictionary;
+
 	/* communicating with the models */
-	private TileBag tileBag;
-	private TileRack tileRack;
-	private PlayedWord playedWord;
-	private IntegerProperty scoreValue;
+	private final TileBag tileBag;
+	private final TileRack tileRack;
+	private final PlayedWord playedWord;
+	private final IntegerProperty scoreValue;
 
 	/* communicating with the view */
 	@FXML private ListView<Tile> tileListView;
@@ -41,16 +44,33 @@ public class BabbleController implements Initializable {
 
 	@FXML private TextField scoreTextField;
 
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
+	/**
+	 * Constructor: initializes all of the instance variables, and prepares the
+	 * models.
+	 * 
+	 * The constructor along side of the initialize method allows the instance
+	 * variables to be declared as constants (preventing accidental reassignment in
+	 * the future)
+	 */
+	public BabbleController() {
+		this.wordDictionary = new WordDictionary();
 
 		this.tileBag = new TileBag();
 
 		this.tileRack = new TileRack();
 
 		this.playedWord = new PlayedWord();
-		
+
 		this.scoreValue = new SimpleIntegerProperty(0);
+	}
+
+	/**
+	 * Called by JavaFX has finished setting up the view. Attaches the controller's
+	 * models to the view objects and initializes the values on the view.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+
 		this.scoreTextField.textProperty().bind(this.scoreValue.asString());
 	}
 
