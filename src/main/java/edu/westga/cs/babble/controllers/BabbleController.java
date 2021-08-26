@@ -168,14 +168,12 @@ public class BabbleController implements Initializable {
 			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
 			return;
 		}
-		
-		System.out.println(hand + " is a valid word");
 
 		this.scoreValue.set(this.scoreValue.get() + this.playedWord.getScore());
 		
 		this.playedWord.tiles().clear();
 		
-		// TODO refresh "Tiles" ListView
+		this.fillTileRackWithTilesFromTileBag();
 	}
 
 	private void fillTileRackWithTilesFromTileBag() {
