@@ -131,6 +131,7 @@ public class BabbleController implements Initializable {
 				this.setGraphic(null);
 			} else {
 				this.setText(tile.getLetter() + "");
+				this.setAccessibleText(tile.getLetter() + "");
 			}
 		}
 	}
