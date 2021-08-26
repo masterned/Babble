@@ -7,6 +7,7 @@ import edu.westga.cs.babble.model.EmptyTileBagException;
 import edu.westga.cs.babble.model.PlayedWord;
 import edu.westga.cs.babble.model.Tile;
 import edu.westga.cs.babble.model.TileBag;
+import edu.westga.cs.babble.model.TileNotInGroupException;
 import edu.westga.cs.babble.model.TileRack;
 import edu.westga.cs.babble.model.TileRackFullException;
 import javafx.beans.property.IntegerProperty;
@@ -80,11 +81,38 @@ public class BabbleController implements Initializable {
 
 		this.scoreTextField.textProperty().bind(this.scoreValue.asString());
 
+		// TODO? extract commonality into private inner class
 		this.tileListView.setItems(this.tileRack.tiles());
 		this.tileListView.setCellFactory(new Callback<ListView<Tile>, ListCell<Tile>>() {
 			@Override
 			public ListCell<Tile> call(ListView<Tile> list) {
 				return new TileCell();
+			}
+		});
+		this.tileListView.setOnMouseClicked(mouseClickedEvent -> {
+			Tile clickedTile = this.tileListView.getSelectionModel().getSelectedItem();
+			try {
+				this.tileRack.remove(clickedTile);
+				this.playedWord.append(clickedTile);
+			} catch (TileNotInGroupException exception) {
+				exception.printStackTrace();
+			}
+		});
+		
+		this.selectedLetterListView.setItems(this.playedWord.tiles());
+		this.selectedLetterListView.setCellFactory(new Callback<ListView<Tile>, ListCell<Tile>>() {
+			@Override
+			public ListCell<Tile> call(ListView<Tile> list) {
+				return new TileCell();
+			}
+		});
+		this.selectedLetterListView.setOnMouseClicked(mouseClickedEvent -> {
+			Tile clickedTile = this.selectedLetterListView.getSelectionModel().getSelectedItem();
+			try {
+				this.playedWord.remove(clickedTile);
+				this.tileRack.append(clickedTile);
+			} catch (TileNotInGroupException exception) {
+				exception.printStackTrace();
 			}
 		});
 	}
@@ -131,10 +159,15 @@ public class BabbleController implements Initializable {
 	 */
 	@FXML
 	public void handlePlayWordButtonClicked(MouseEvent clickEvent) {
-		if (this.playedWord.tiles().isEmpty() || !this.wordDictionary.isValidWord(this.playedWord.getHand())) {
+		
+		String hand = this.playedWord.getHand();
+		
+		if (this.playedWord.tiles().isEmpty() || !this.wordDictionary.isValidWord(hand)) {
 			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
 			return;
 		}
+		
+		System.out.println(hand + " is a valid word");
 		
 		// TODO increase player's score by word score
 		
