@@ -141,8 +141,10 @@ public class BabbleController implements Initializable {
 	 */
 	@FXML
 	public void handleResetButtonClicked(MouseEvent clickEvent) {
-		/* TODO: write code to handle click event */
-		this.scoreValue.setValue(0);
+		if (!this.playedWord.tiles().isEmpty()) {			
+			this.tileRack.tiles().addAll(this.playedWord.tiles());
+			this.playedWord.tiles().clear();
+		}
 	}
 
 	/**
