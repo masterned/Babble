@@ -170,8 +170,8 @@ public class BabbleController implements Initializable {
 		}
 		
 		System.out.println(hand + " is a valid word");
-		
-		// TODO increase player's score by word score
+
+		this.scoreValue.set(this.scoreValue.get() + this.playedWord.getScore());
 		
 		// TODO clear "Your Word" ListView
 		
