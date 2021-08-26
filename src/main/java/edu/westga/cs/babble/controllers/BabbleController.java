@@ -148,7 +148,7 @@ public class BabbleController implements Initializable {
 	public void handleResetButtonClicked(MouseEvent clickEvent) {
 		if (!this.playedWord.tiles().isEmpty()) {			
 			this.tileRack.tiles().addAll(this.playedWord.tiles());
-			this.playedWord.tiles().clear();
+			this.playedWord.clear();
 		}
 	}
 
@@ -176,7 +176,7 @@ public class BabbleController implements Initializable {
 
 		this.scoreValue.set(this.scoreValue.get() + this.playedWord.getScore());
 		
-		this.playedWord.tiles().clear();
+		this.playedWord.clear();
 		
 		this.fillTileRackWithTilesFromTileBag();
 	}
