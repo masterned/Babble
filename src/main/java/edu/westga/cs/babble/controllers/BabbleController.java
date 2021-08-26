@@ -13,6 +13,8 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -40,18 +42,13 @@ public class BabbleController implements Initializable {
 	private final IntegerProperty scoreValue;
 
 	/* communicating with the view */
-	@FXML
-	private ListView<Tile> tileListView;
-	@FXML
-	private ListView<Tile> selectedLetterListView;
+	@FXML private ListView<Tile> tileListView;
+	@FXML private ListView<Tile> selectedLetterListView;
 
-	@FXML
-	private Button resetButton;
-	@FXML
-	private Button playWordButton;
+	@FXML private Button resetButton;
+	@FXML private Button playWordButton;
 
-	@FXML
-	private TextField scoreTextField;
+	@FXML private TextField scoreTextField;
 
 	/**
 	 * Constructor: initializes all of the instance variables, and prepares the
@@ -65,7 +62,7 @@ public class BabbleController implements Initializable {
 		this.wordDictionary = new WordDictionary();
 
 		this.tileBag = new TileBag();
-		
+
 		this.tileRack = new TileRack();
 		this.fillTileRackWithTilesFromTileBag();
 
@@ -82,7 +79,7 @@ public class BabbleController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 		this.scoreTextField.textProperty().bind(this.scoreValue.asString());
-		
+
 		this.tileListView.setItems(this.tileRack.tiles());
 		this.tileListView.setCellFactory(new Callback<ListView<Tile>, ListCell<Tile>>() {
 			@Override
@@ -91,16 +88,16 @@ public class BabbleController implements Initializable {
 			}
 		});
 	}
-	
+
 	static class TileCell extends ListCell<Tile> {
 		@Override
 		public void updateItem(Tile tile, boolean empty) {
 			super.updateItem(tile, empty);
-			
+
 			if (empty || tile == null) {
 				this.setText(null);
 				this.setGraphic(null);
-			} else {				
+			} else {
 				this.setText(tile.getLetter() + "");
 			}
 		}
@@ -134,8 +131,16 @@ public class BabbleController implements Initializable {
 	 */
 	@FXML
 	public void handlePlayWordButtonClicked(MouseEvent clickEvent) {
-		/* TODO: write code to handle click event */
-		this.scoreValue.set(this.scoreValue.get() + 1);
+		if (this.playedWord.tiles().isEmpty() || !this.wordDictionary.isValidWord(this.playedWord.getHand())) {
+			new Alert(AlertType.INFORMATION, "Not a valid word").showAndWait();
+			return;
+		}
+		
+		// TODO increase player's score by word score
+		
+		// TODO clear "Your Word" ListView
+		
+		// TODO refresh "Tiles" ListView
 	}
 
 	private void fillTileRackWithTilesFromTileBag() {
