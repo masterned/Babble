@@ -91,11 +91,13 @@ public class BabbleController implements Initializable {
 		});
 		this.tileListView.setOnMouseClicked(mouseClickedEvent -> {
 			Tile clickedTile = this.tileListView.getSelectionModel().getSelectedItem();
-			try {
-				this.tileRack.remove(clickedTile);
-				this.playedWord.append(clickedTile);
-			} catch (TileNotInGroupException exception) {
-				exception.printStackTrace();
+			if (clickedTile != null) {				
+				try {
+					this.tileRack.remove(clickedTile);
+					this.playedWord.append(clickedTile);
+				} catch (TileNotInGroupException exception) {
+					exception.printStackTrace();
+				}
 			}
 		});
 		
@@ -108,11 +110,13 @@ public class BabbleController implements Initializable {
 		});
 		this.selectedLetterListView.setOnMouseClicked(mouseClickedEvent -> {
 			Tile clickedTile = this.selectedLetterListView.getSelectionModel().getSelectedItem();
-			try {
-				this.playedWord.remove(clickedTile);
-				this.tileRack.append(clickedTile);
-			} catch (TileNotInGroupException exception) {
-				exception.printStackTrace();
+			if (clickedTile != null) {				
+				try {
+					this.playedWord.remove(clickedTile);
+					this.tileRack.append(clickedTile);
+				} catch (TileNotInGroupException exception) {
+					exception.printStackTrace();
+				}
 			}
 		});
 	}
