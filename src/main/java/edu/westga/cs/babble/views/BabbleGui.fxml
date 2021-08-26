@@ -11,20 +11,35 @@
       <VBox spacing="10.0">
          <children>
             <Label contentDisplay="RIGHT" text="Tiles" />
-            <ListView fx:id="tileListView" fixedCellSize="24.0" orientation="HORIZONTAL" prefHeight="25.0" />
+            <ListView fx:id="tileListView" fixedCellSize="24.0" orientation="HORIZONTAL" prefHeight="25.0">
+               <tooltip>
+                  <Tooltip text="The available tiles to select from to create a word." />
+               </tooltip></ListView>
             <Label text="Your Word" />
-            <ListView fx:id="selectedLetterListView" fixedCellSize="24.0" orientation="HORIZONTAL" prefHeight="25.0" />
+            <ListView fx:id="selectedLetterListView" fixedCellSize="24.0" orientation="HORIZONTAL" prefHeight="25.0">
+               <tooltip>
+                  <Tooltip text="The tiles currently in the player's hand to be played." />
+               </tooltip></ListView>
             <HBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
-                  <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#handleResetButtonClicked" text="Reset" />
-                  <Button fx:id="playWordButton" mnemonicParsing="false" onMouseClicked="#handlePlayWordButtonClicked" text="Play Word" />
+                  <Button fx:id="resetButton" mnemonicParsing="false" onMouseClicked="#handleResetButtonClicked" text="Reset">
+                     <tooltip>
+                        <Tooltip text="Moves the tiles in the hand back to the tile rack." />
+                     </tooltip></Button>
+                  <Button fx:id="playWordButton" mnemonicParsing="false" onMouseClicked="#handlePlayWordButtonClicked" text="Play Word">
+                     <tooltip>
+                        <Tooltip text="Attempts to play the current hand." />
+                     </tooltip></Button>
                </children>
             </HBox>
             <HBox alignment="TOP_RIGHT">
                <children>
                   <Label contentDisplay="RIGHT" text="Score:">
                      <graphic>
-                        <TextField fx:id="scoreTextField" editable="false" />
+                        <TextField fx:id="scoreTextField" editable="false">
+                           <tooltip>
+                              <Tooltip text="The player's current score." />
+                           </tooltip></TextField>
                      </graphic>
                   </Label>
                </children>
