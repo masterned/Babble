@@ -173,7 +173,7 @@ public class BabbleController implements Initializable {
 
 		this.scoreValue.set(this.scoreValue.get() + this.playedWord.getScore());
 		
-		// TODO clear "Your Word" ListView
+		this.playedWord.tiles().clear();
 		
 		// TODO refresh "Tiles" ListView
 	}
