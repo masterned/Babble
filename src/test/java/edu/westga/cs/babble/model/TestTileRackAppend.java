@@ -1,6 +1,6 @@
 package edu.westga.cs.babble.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ public class TestTileRackAppend {
 		for (int count = 0; count < TileRack.MAX_SIZE; count++) {
 			testTileRack.append(new Tile('A'));
 		}
-		
+
 		assertThrows(TileRackFullException.class, () -> testTileRack.append(new Tile('B')));
 	}
 }

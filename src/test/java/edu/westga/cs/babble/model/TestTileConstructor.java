@@ -1,6 +1,7 @@
 package edu.westga.cs.babble.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ public class TestTileConstructor {
 	 * characters. Verifies that the constructor creates a tile with the correct
 	 * letter and score value.
 	 * 
-	 * @param score - the expected score of the tile
+	 * @param score      - the expected score of the tile
 	 * @param letterList - a String containing all of the letters to be tested
 	 */
 	private void shouldCreateXPointTiles(int score, String letterList) {
@@ -91,8 +92,8 @@ public class TestTileConstructor {
 	}
 
 	/**
-	 * The only five-point letter (upper & lower-case) can be created with the correct
-	 * letter and score values.
+	 * The only five-point letter (upper & lower-case) can be created with the
+	 * correct letter and score values.
 	 */
 	@Test
 	public void shouldCreateFivePointTiles() {
